@@ -1,31 +1,39 @@
-int kadane(vector<int>& nums){
-    int n = nums.size();
-    int currSum = 0, max1 = INT_MIN;
-    for(int i = 0; i < n; i++ ){
-        currSum += nums[i];
-        max1 = max(max1, currSum);
-        if(currSum < 0) currSum = 0;
-        
-    }
-    return max1;
-}
-
 class Solution {
+    
+    
+    int kadane(vector<int> arr) {
+        int curr = arr[0],max_sum = arr[0];
+        
+        for(int i = 1; i < arr.size() ; i++){
+            if(curr <0) curr = 0;
+            
+            curr += arr[i];
+            
+            max_sum = max(max_sum, curr);
+            // cout <<" *"<< max_sum << "* ";
+        }
+        return max_sum;
+    }
 public:
     int maxSubarraySumCircular(vector<int>& nums) {
-        int n = nums.size();
-        int nonwrapsum = kadane(nums);
-        if(nonwrapsum < 0){
-            return nonwrapsum;
-        }
-        int wrapsum;
-        int total = 0;
-        for(int i = 0; i < n; i++){
-            total += nums[i];
-            nums[i] = -nums[i];
-        }
+        int totalsum = 0, ifpos = 0;
         
-        wrapsum = total + kadane(nums);
-        return max(wrapsum, nonwrapsum);
+        for(auto x : nums) {
+            totalsum += x;
+            if(x > 0 ) ifpos = 1;
+        }
+        if(ifpos == 0) return kadane(nums);
+        vector<int> arr = nums;
+       for(int i = 0; i < nums.size() ; i++){
+           nums[i] *= -1;
+       }
+        // for(auto x: nums){
+        //     cout << x <<" ";
+        // }
+        
+        int min_sum = kadane(nums);
+        // cout << min_sum<<" ";
+        return max(totalsum + min_sum, kadane(arr));
+        
     }
 };
