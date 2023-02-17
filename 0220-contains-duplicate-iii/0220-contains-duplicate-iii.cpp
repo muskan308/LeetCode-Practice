@@ -3,17 +3,17 @@ public:
     
     
     bool containsNearbyAlmostDuplicate(vector<int>& nums, int indexDiff, int valueDiff) {
-        vector<pair<int, int>> pairs;
+        int n = nums.size();
+        vector<pair<int, int>> pairs(n);
         
-        for(int i = 0; i < nums.size() ; i++){
-            pairs.push_back({nums[i], i});
+        for(int i = 0; i < n; i++){
+            pairs[i].first = nums[i];
+            pairs[i].second = i;
         }
         sort(pairs.begin(), pairs.end());
-        for(int i = 0; i < pairs.size() ; i++){
-            cout << pairs[i].first << " "<<pairs[i].second<< endl;
-        }
-        for(int j = 0 ; j < nums.size() ; j++){
-            for(int i = j+1 ; i < nums.size() && (pairs[i].first-pairs[j].first) <= valueDiff ; i++){
+        
+        for(int j = 0 ; j < n ; j++){
+            for(int i = j+1 ; i < n && (pairs[i].first-pairs[j].first) <= valueDiff ; i++){
                 if(pairs[i].first - pairs[j].first <= valueDiff){
                     if(abs(pairs[i].second - pairs[j].second) <= indexDiff){
                         return true;
