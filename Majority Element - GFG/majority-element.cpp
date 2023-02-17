@@ -18,11 +18,10 @@ class Solution{
         unordered_map<int, int> counts;
         for(int i = 0 ; i < size ; i++){
             counts[arr[i]]++;
+            if(counts[arr[i]] > (size/2)) return arr[i];
         }
         
-        for(auto i = counts.begin(); i != counts.end() ; i++){
-            if(i->second > (size/2))return i->first;
-        }
+        
         return -1;
     }
 };
