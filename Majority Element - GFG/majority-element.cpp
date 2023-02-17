@@ -15,14 +15,24 @@ class Solution{
     // size: size of input array
     int majorityElement(int arr[], int size)
     {
-        unordered_map<int, int> counts;
-        for(int i = 0 ; i < size ; i++){
-            counts[arr[i]]++;
-            if(counts[arr[i]] > (size/2)) return arr[i];
+       
+        int ans = arr[0], count =1;
+        for(int i = 1 ; i < size; i++){
+            if(ans != arr[i]){
+                count--;
+            }else count++;
+            if(count == 0){
+                ans = arr[i];
+                count = 1;
+            }
+        }
+        count = 0;
+        for(int i =0; i < size ; i++){
+            if(arr[i]==ans) count++;
         }
         
-        
-        return -1;
+        if(count > (size/2))return ans;
+    return -1;
     }
 };
 
