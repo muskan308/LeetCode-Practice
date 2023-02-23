@@ -1,32 +1,32 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 #include <bits/stdc++.h>
 using namespace std;
 
- // } Driver Code Ends
+// } Driver Code Ends
 class Solution {
   public:
-    // Function to return a list containing the DFS traversal of the graph.
+    // Function to return a list containing the DFS traversal of the graph
     
-    void DFS_rec(vector<int> adj[], unordered_set<int> &visited, int s, vector<int> &ans){
-        visited.insert(s);
-        ans.push_back(s);
-        for(int i = 0; i < adj[s].size() ; i++){
-            if(visited.count(adj[s][i]) == 0){
-                DFS_rec(adj, visited, adj[s][i], ans);
+    void dsf(vector<int> adj[], int source, unordered_set<int> &visited, vector<int> &ans ){
+        visited.insert(source);
+        ans.push_back(source);
+        for(int i = 0; i < adj[source].size() ; i++){
+            if(visited.count(adj[source][i]) == false){
+                dsf(adj, adj[source][i], visited, ans);
             }
         }
-        
     }
+    
     vector<int> dfsOfGraph(int V, vector<int> adj[]) {
         // Code here
         vector<int> ans;
         unordered_set<int> visited;
-        DFS_rec(adj, visited, 0, ans);
+        dsf(adj, 0, visited, ans);
         return ans;
     }
 };
 
-// { Driver Code Starts.
+//{ Driver Code Starts.
 int main() {
     int tc;
     cin >> tc;
@@ -52,4 +52,5 @@ int main() {
         cout << endl;
     }
     return 0;
-}  // } Driver Code Ends
+}
+// } Driver Code Ends
