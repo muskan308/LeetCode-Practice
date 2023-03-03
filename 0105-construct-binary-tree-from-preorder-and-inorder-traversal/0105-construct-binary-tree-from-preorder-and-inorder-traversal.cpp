@@ -11,27 +11,28 @@
  */
 class Solution {
 public:
-    
-    TreeNode *solve(vector<int> pre, int &preIndex, int startIn, int endIn, map<int, int> &mp){
+    int preIndex;
+    map<int, int> mp;
+    TreeNode *solve(vector<int> pre, int startIn, int endIn){
         if(startIn > endIn){
             return NULL;
         }
         int element = pre[preIndex++];
         TreeNode *root = new TreeNode(element);
         int pos = mp[element];
-        root->left = solve(pre, preIndex, startIn, pos-1, mp);
-        root->right = solve(pre, preIndex, pos+1, endIn, mp);
+        root->left = solve(pre, startIn, pos-1);
+        root->right = solve(pre, pos+1, endIn);
         return root;
     }
     
     TreeNode* buildTree(vector<int>& pre, vector<int>& in) {
         int n= in.size();
-        map<int, int> mp;
+        
         for(int i = 0; i < n ; i++){
             mp[in[i]] = i;
         }
-        int preIndex = 0;
-        TreeNode * ans = solve(pre, preIndex, 0, n-1, mp);
+        preIndex = 0;
+        TreeNode * ans = solve(pre, 0, n-1);
         return ans;
     }
 };
