@@ -23,7 +23,7 @@ public:
             str="";
            str += s[i];
             str+=s[i+1];
-            cout << str<< " ";
+          //  cout << str<< " ";
            if(roman1.count(str)){
                cout << str<<" ";
                ans += roman1[str];
