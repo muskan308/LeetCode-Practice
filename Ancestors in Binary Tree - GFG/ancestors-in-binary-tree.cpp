@@ -103,22 +103,18 @@ struct Node
 class Solution{
   public:
   vector<int> v;
-  bool flag = false;
-  void ans(struct Node *root, int target){
-      if(root==NULL)return ;
+//   bool flag = false;
+  bool ans(struct Node *root, int target){
+      if(root==NULL)return false;
       if(root->data == target){
-          flag = true;
-          return;
+          return true;
       }
       
-      else{
-        ans(root->left, target);
-        if(flag==false) ans(root->right, target);
-      }
-      if(flag == true){
+      if(ans(root->left, target) || ans(root->right, target)){
           v.push_back(root->data);
+          return true;
       }
-      
+      return false;
   }
     // Function should return all the ancestor of the target node
     vector<int> Ancestors(struct Node *root, int target)
