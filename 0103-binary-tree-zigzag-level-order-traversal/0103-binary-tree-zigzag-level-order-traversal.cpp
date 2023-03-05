@@ -19,12 +19,12 @@ public:
         vector<vector<int>> ans;
         while(!q.empty()){
             vector<int> a;
-            stack<int> st;
+             stack<int> st;
             int s = q.size();
             for(int i = 0; i < s ;i++){
                 TreeNode* t = q.front();
                 q.pop();
-                st.push(t->val);
+                if(!toggle) st.push(t->val);
                 a.push_back(t->val);
                 if(t->left) q.push(t->left);
                 if(t->right) q.push(t->right);
