@@ -17,9 +17,10 @@ public:
         q.push(root);
         bool toggle = true;
         vector<vector<int>> ans;
+         stack<int> st;
         while(!q.empty()){
             vector<int> a;
-             stack<int> st;
+            
             int s = q.size();
             for(int i = 0; i < s ;i++){
                 TreeNode* t = q.front();
