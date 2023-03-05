@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-     vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
         if(root == NULL) return {};
         stack<TreeNode*> st1, st2;
         vector<vector<int>> ans;
