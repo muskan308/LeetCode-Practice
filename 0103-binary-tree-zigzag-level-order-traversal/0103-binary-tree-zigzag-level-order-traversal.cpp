@@ -12,36 +12,31 @@
 class Solution {
 public:
     vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
-        if(root==NULL)return {};
-        queue<TreeNode*> q;
-        q.push(root);
-        bool toggle = true;
+        if(root == NULL) return {};
+        stack<TreeNode*> st1, st2;
         vector<vector<int>> ans;
-         stack<int> st;
-        while(!q.empty()){
+        
+        st1.push(root);
+        while(!st1.empty() || !st2.empty()){
             vector<int> a;
-            
-            int s = q.size();
-            for(int i = 0; i < s ;i++){
-                TreeNode* t = q.front();
-                q.pop();
-                if(!toggle) st.push(t->val);
-                a.push_back(t->val);
-                if(t->left) q.push(t->left);
-                if(t->right) q.push(t->right);
+            int s1 = st1.size();
+            while(!st1.empty()){
+                TreeNode* v = st1.top();
+                st1.pop();
+                if(v->left) st2.push(v->left);
+                if(v->right) st2.push(v->right);
+                a.push_back(v->val);
             }
-            if(!toggle){
-                vector<int> b;
-                int i =0;
-                while(!st.empty()){
-                    b.push_back(st.top());
-                    st.pop();
-                    i++;
-                }
-                ans.push_back(b);
+            if(a.size() > 0)  ans.push_back(a);
+            a= {};
+            while(!st2.empty()){
+                TreeNode* v = st2.top();
+                st2.pop();
+                if(v->right) st1.push(v->right);
+                if(v->left) st1.push(v->left);
+                a.push_back(v->val);
             }
-            else ans.push_back(a);
-            toggle = !toggle;
+            if(a.size() > 0) ans.push_back(a);
         }
         return ans;
     }
