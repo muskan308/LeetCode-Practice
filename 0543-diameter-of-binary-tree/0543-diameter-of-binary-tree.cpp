@@ -11,18 +11,21 @@
  */
 class Solution {
 public:
-    map<TreeNode*, int> heights;
-    int height(TreeNode *root){
-        if(root==NULL)return heights[root]=0;
-        
-        return heights[root] = 1+ max(height(root->left), height(root->right));
+    int res;
+   int height(TreeNode *root){
+        if(root==NULL)return 0;
+        int h1 = height(root->left);
+        int h2 = height(root->right);
+        res = max(h1+h2,res);
+        return 1+ max(h1, h2);
     }
     int diameterOfBinaryTree(TreeNode* root) {
-        if(root==NULL)return 0;
-        height(root);
+//         if(root==NULL)return 0;
         
-        int h1 = heights[root->left];
-        int h2 = heights[root->right];
-        return max(h1+h2, max(diameterOfBinaryTree(root->left),diameterOfBinaryTree(root->right) ));
+//         int h1 = height(root->left);
+//         int h2 = height(root->right);
+//         return max(h1+h2, max(diameterOfBinaryTree(root->left),diameterOfBinaryTree(root->right) ));
+        height(root);
+        return res;
     }
 };
