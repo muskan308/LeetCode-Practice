@@ -10,33 +10,21 @@
 class Solution {
 public:
     
-    bool ans(TreeNode *root, TreeNode *target, vector<TreeNode*> &arr){
-        if(root==NULL)return false;
-        if(root==target){
-            arr.push_back(root);
-            return true;
-        }
-        if(ans(root->left, target, arr) || ans(root->right, target, arr)){
-            arr.push_back(root);
-            return true;
-        }
-        return false;
+    TreeNode* ans(TreeNode *root, TreeNode *q, TreeNode *p){
+        
+        if(!root || root==q|| root==p)return root;
+        TreeNode *l = ans(root->left, q, p);
+        TreeNode *r = ans(root->right, q, p);
+        bool curr = (root == q || root==p);
+        if(curr && (l || r)) return root;
+        return (!l ? r : !r ? l : root);
+        
     }
     
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        vector<TreeNode*> arr1, arr2;
         
-        ans(root, p, arr1);
-        ans(root, q, arr2);
+        return ans(root, p,q);
         
-        int i = arr1.size()-1, j = arr2.size()-1;
-        // cout << i << " "<<j;
-        while(i>=0 && j>=0){
-            if(i == 0) return arr1[i];
-            if(j == 0) return arr2[j];
-            if(arr1[i-1]->val != arr2[j-1]->val)return arr1[i];
-            i--;j--;
-        }
-        return NULL;
+        
     }
 };
