@@ -13,22 +13,18 @@ class Solution {
 public:
 
    
-  
+    int rheight(TreeNode* root){
+        if(root==NULL)return 0;
+        return 1 + rheight(root->right);
+    }
+     int lheight(TreeNode* root){
+        if(root==NULL)return 0;
+        return 1 + lheight(root->left);
+    }
     int countNodes(TreeNode* root) {
         if(root==NULL) return 0;
-        int lh = 0;
-        int rh = 0;
-        TreeNode* curr = root;
-        while(curr){
-            lh ++;
-            curr = curr->left;
-        }
-        curr = root;
-        while(curr){
-            rh++;
-            curr = curr->right;
-        }
-        
+        int lh = lheight(root);
+        int rh = rheight(root);
         if(lh== rh){
             return pow(2,lh)-1;
         }
