@@ -11,13 +11,7 @@
  */
 class Solution {
 public:
-    
-    int height(TreeNode* root){
-        if(!root) return 0;
-        int lh = height(root->left);
-        int rh = height(root->right);
-        return 1 + max(lh, rh);
-    }
+
    
     int rheight(TreeNode* root){
         if(root==NULL)return 0;
@@ -29,9 +23,10 @@ public:
     }
     int countNodes(TreeNode* root) {
         if(root==NULL) return 0;
-        if(lheight(root) == rheight(root)){
-            int h = height(root);
-            return pow(2,h)-1;
+        int lh = lheight(root);
+        int rh = rheight(root);
+        if(lh== rh){
+            return pow(2,lh)-1;
         }
         
         return 1 + countNodes(root->left) + countNodes(root->right);
