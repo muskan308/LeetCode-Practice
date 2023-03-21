@@ -102,7 +102,7 @@ class Solution{
     bool check(Node *root)
     {
         //Your code here
-        vector<int> levels;
+        unordered_set<int> levels;
         
         queue<Node*> q;
         q.push(root);
@@ -119,15 +119,12 @@ class Solution{
                 if(front->right) q.push(front->right);
                 
                 if(!front->left && !front->right){
-                    levels.push_back(level);
+                    levels.insert(level);
                 }
             }
         }
         
-        for(int i = 0 ; i < levels.size()-1; i ++){
-            if(levels[i] != levels[i+1]) return false;
-        }
-        return true;
+        return levels.size()==1;
     }
 };
 
