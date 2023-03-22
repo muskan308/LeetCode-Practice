@@ -10,18 +10,18 @@ public:
         // for(int i = 0; i < num2.size(); i++){
         //     st2.push(num2[i]-'0');
         // }
-        stack<int> ans;
+        string str ="";
         int carry =0;
         while(i >= 0 && j >= 0){
             int a = num1[i]-'0', b = num2[j]-'0';
             i--;j--;
             int val = a+b+carry;
             carry = val/10;
-            ans.push(val%10);
+            str+= to_string(val%10);
         }
         while(i >= 0){
             int val = num1[i]-'0'+carry;
-            ans.push(val%10);
+            str+= to_string(val%10);
             carry = val/10;
             i--;
         }
@@ -29,16 +29,15 @@ public:
        
         while(j >= 0){
             int val = num2[j]-'0'+carry;
-            ans.push(val%10);
+            str+= to_string(val%10);
             carry = val/10;
             j--;
         }
-        if(carry!=0) ans.push(carry);
-        string str ="";
-                     while(!ans.empty()){
-                         str+= to_string(ans.top());
-                         ans.pop();
-                     }
-                     return str;
+        if(carry!=0) str+= to_string(carry);
+        for(int k = 0; k < str.size()/2 ;k++){
+            swap(str[k], str[str.size()-1-k]);
+        }
+                    
+        return str;
     }
 };
