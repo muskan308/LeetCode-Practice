@@ -13,7 +13,7 @@ class Solution{
     int atoi(string str) {
         //Your code here
         int ans = 0;
-        queue<int> st;
+       
         int i =0 ;
         bool neg = false;
         if(str[0] == '-'){
@@ -24,13 +24,11 @@ class Solution{
             if(!(str[i] >= '0' && str[i] <= '9')){
                 return -1;
             }else{
-                st.push(str[i]-'0');
+                
+                 ans = ans*10 + str[i]-'0';
             }
         }
-        while(!st.empty()){
-            ans = ans*10 + st.front();
-            st.pop();
-        }
+        
         return neg ? 0-ans : ans;
     }
     
