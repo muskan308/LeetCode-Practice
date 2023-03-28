@@ -2,7 +2,7 @@ class Solution {
 public:
     string removeDuplicates(string s, int k) {
         if(s.size() == 0) return "";
-        deque<pair<char, int>> str;
+        vector<pair<char, int>> str;
         
         
       
@@ -28,12 +28,12 @@ public:
         }
         string st = "";
        
-        while(!str.empty()){
-            while(str.front().second != 0){
-                st += str.front().first;
-                str.front().second--;
+        for(int i = 0; i < str.size() ; i++){
+            while(str[i].second != 0){
+                st += str[i].first;
+                str[i].second--;
             }
-            str.pop_front();
+            
         }
     
         return st;
