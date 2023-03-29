@@ -5,7 +5,7 @@ public:
         // unordered_set<char> chars;
         int ans = 0, ma = INT_MIN;
         int i = 0, j =0;
-        vector<int> index(256, -1); 
+        vector<int> index(128, -1); 
         while(j < s.size()){
             if(index[s[j]] == -1){
                 ans++;
