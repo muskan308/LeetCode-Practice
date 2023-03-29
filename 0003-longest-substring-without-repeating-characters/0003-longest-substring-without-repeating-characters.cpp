@@ -13,7 +13,7 @@ public:
                 j++;
             }else{
                 ma = max(ma, ans);
-                cout << ma << endl;
+              //  cout << ma << endl;
                 while(index[s[j]] == 1){
                     index[s[i]] = -1;
                     i++;
